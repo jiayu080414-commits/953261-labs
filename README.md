@@ -17,9 +17,8 @@ npm start
 Then open <http://localhost:3000> and <http://localhost:3000/api/me>.
 
 ## What I learned today
-
-_Write 2–3 sentences in your own words: what happens between typing a URL and seeing the page?_
+When I type a URL in the browser,the browser sends an HTTP request to the server.The server precesses the request and sends back a response. the browser then displays the webpage based on the response.
 
 ## AI-use statement
 
-_Did you use an AI tool in this lab? If yes, which one and for what (e.g., "ChatGPT to explain a Git error message"). If no, write "No AI tools used."_
+ChatGPT to help me understand the instructions,and fix errors.
