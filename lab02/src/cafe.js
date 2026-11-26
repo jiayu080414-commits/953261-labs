@@ -8,12 +8,14 @@
 // Return an array of item names, in menu order.
 // menuNames(menu) → ["Thai Iced Tea", "Americano", ...]
 export function menuNames(menu) {
+  return menu.map((item) => item.name);
   // TODO
 }
 
 // Task 2 — filter
 // Return only the items whose `available` is true.
 export function availableItems(menu) {
+  return menu.filter((item) => item.available);
   // TODO
 }
 
@@ -21,6 +23,7 @@ export function availableItems(menu) {
 // Return the item with this id, or undefined if there is none.
 // findItem(menu, "F01") → { id: "F01", name: "Khao Soi", ... }
 export function findItem(menu, id) {
+  return menu.find((item) => item.id === id);
   // TODO
 }
 
@@ -28,6 +31,9 @@ export function findItem(menu, id) {
 // Return the NAMES of the available items in one category.
 // availableIn(menu, "dessert") → ["Mango Sticky Rice", "Coconut Ice Cream"]
 export function availableIn(menu, category) {
+  return menu
+  .filter((item) => item.available && item.category === category)
+  .map((item) => item.name);
   // TODO
 }
 
@@ -37,7 +43,9 @@ export function availableIn(menu, category) {
 //   "Butterfly Pea Soda — 50 THB (sold out)"     ← when available is false
 // Hint: start with  const { name, price, available } = item;
 export function menuLine(item) {
-  // TODO
+  const {name, price, available} = item;
+ return `${name} — ${price} THB${available ? "" : " (sold out)"}`;
+    // TODO
 }
 
 // Task 6 — spread
@@ -45,14 +53,18 @@ export function menuLine(item) {
 // The original item must not change.
 // withDiscount({ ..., price: 45 }, 10) → { ..., price: 41 }   (45 × 0.9 = 40.5 → 41)
 export function withDiscount(item, percent) {
-  // TODO
+  return { ...item, price: Math.round((item.price * (100 - percent)) / 100) };
 }
-
+  // TODO
 // Task 7 — reduce + find
 // Return the total price of one order in baht.
 // Each line costs  (price of that menu item) × qty.
 // orderTotal(orders[0], menu) → 160   (2 × 45 + 1 × 70)
 export function orderTotal(order, menu) {
+   return order.items.reduce(
+    (sum, line) => sum + findItem(menu, line.menuId).price * line.qty,
+    0,
+  );
   // TODO
 }
 
@@ -60,7 +72,12 @@ export function orderTotal(order, menu) {
 // Return the average order total, rounded to 2 decimal places.
 // Return 0 when there are no orders.
 export function averageOrder(orders, menu) {
-  // TODO
+  // TODO  //
+  if (orders.length === 0) return 0;
+  const totals = orders.map((order) => orderTotal(order, menu));
+  const sum = totals.reduce((acc, n) => acc + n, 0);
+  return Math.round((sum / orders.length) * 100) / 100;
+
 }
 
 // ───────────── Stretch (optional) ─────────────
