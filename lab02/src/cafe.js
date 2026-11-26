@@ -92,3 +92,8 @@ export function bestSeller(orders, menu) {
 export function namesByCategory(menu) {
   // TODO
 }
+export function itemsWithTag(menu, tag) {
+  return menu
+    .filter((item) => item.tags.includes(tag))
+    .map((item) => item.name);
+}
