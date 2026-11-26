@@ -16,17 +16,29 @@ const PORT = 3000;
 const server = http.createServer((req, res) => {
   console.log(req.method, req.url);
 
-  if (req.method === "GET" && req.url === "/") {
-    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
-    res.end("<h1>Hello, 953261!</h1><p>My name is ______ (student ID ______)</p>");
+  if (req.method === "GET" && req.url === "/api/me") {
+    res.writeHead(200, { "Content-Type": "application/json" });
+    const me = {
+      "name": "Isa",
+      "studentId": "692115503",
+      "favouriteLanguage": "JavaScript"
+    };
+    res.writeHead(200, { "Content-Type": "application/json" });
+    res.end(JSON.stringify(me));
     return;
   }
 
   // TODO: add GET /api/me here
-
+  //This will send HTTP 200 with a short HTML message. The type is text/html.
+if (req.method === "GET" && req.url === "/") {
+    res.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
+    res.end("<h1>Welcome to my Node.js server!</h1><p>Nickname: Isa, Student ID: 692115503</p>");
+    return;
+  }
+//This sends HTTP 404 if the path is invalid. The type is text.
   // TODO: replace this with a proper 404 response
-  res.writeHead(200, { "Content-Type": "text/plain" });
-  res.end("Not done yet");
+  res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
+  res.end("<h1>404 Not Found</h1><p>The requested resource was not found.</p>");
 });
 
 server.listen(PORT, () => console.log(`Running at http://localhost:${PORT}`));
