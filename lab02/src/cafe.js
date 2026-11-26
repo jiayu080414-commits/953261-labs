@@ -97,3 +97,8 @@ export function itemsWithTag(menu, tag) {
     .filter((item) => item.tags.includes(tag))
     .map((item) => item.name);
 }
+export function itemsWithAnyTag(menu, tags) {
+  return menu
+    .filter((item) => item.tags.some((tag) => tags.includes(tag)))
+    .map((item) => item.name);
+}
